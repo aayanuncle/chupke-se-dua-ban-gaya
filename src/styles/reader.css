@@ -12,6 +12,10 @@
 .progress__bar { height: 100%; background: var(--c-gold); transform: scaleX(0); transform-origin: left; will-change: transform; }
 html[dir='rtl'] .progress__bar { transform-origin: right; }
 
+.reader-scroll { position: fixed; inset-inline-end: clamp(16px, 4vw, 32px); bottom: clamp(16px, 4vw, 32px); z-index: 30; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border: 1px solid var(--c-gold-line); border-radius: 2px; background: var(--c-ink); color: var(--c-white); box-shadow: 0 4px 16px rgba(36, 37, 33, 0.18); font-size: 0.875rem; transition: background var(--dur) var(--ease), color var(--dur) var(--ease); }
+.reader-scroll:hover { background: var(--c-green); }
+.reader-scroll:focus-visible { outline-color: var(--c-gold); }
+
 /* ── Header ── */
 .reader-head { padding-top: clamp(28px, 4vw, 48px); text-align: center; }
 .reader-head .container { display: flex; flex-direction: column; align-items: center; }

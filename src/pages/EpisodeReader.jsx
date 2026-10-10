@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { ArrowDown, ArrowUp } from 'lucide-react';
 import { useParams } from 'react-router-dom';
 import Container from '../components/common/Container.jsx';
 import Button from '../components/common/Button.jsx';
@@ -21,8 +22,24 @@ function ReaderView({ meta }) {
   const [state, setState] = useState({ status: 'loading', data: null });
   const [attempt, setAttempt] = useState(0);
   const [view, setView] = useState('original');
+  const [scrollTarget, setScrollTarget] = useState('bottom');
 
   useDocumentTitle(`${episodeLabel(meta.number)}${meta.title ? `: ${meta.title}` : ''} · ${novelTitle}`);
+
+  useEffect(() => {
+    const updateScrollTarget = () => {
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollTarget(maxScroll > 0 && window.scrollY >= maxScroll / 2 ? 'top' : 'bottom');
+    };
+
+    updateScrollTarget();
+    window.addEventListener('scroll', updateScrollTarget, { passive: true });
+    window.addEventListener('resize', updateScrollTarget);
+    return () => {
+      window.removeEventListener('scroll', updateScrollTarget);
+      window.removeEventListener('resize', updateScrollTarget);
+    };
+  }, []);
 
   useEffect(() => {
     let live = true;
@@ -78,6 +95,20 @@ function ReaderView({ meta }) {
 
         {state.status === 'ready' && <EpisodeNavigation prev={prev} next={next} episode={meta} />}
       </Container>
+      {state.status === 'ready' && (
+        <button
+          type="button"
+          className="reader-scroll"
+          onClick={() => window.scrollTo({
+            top: scrollTarget === 'top' ? 0 : document.documentElement.scrollHeight,
+            behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+          })}
+          aria-label={t(scrollTarget === 'top' ? 'reader.scrollToTop' : 'reader.scrollToBottom')}
+        >
+          {scrollTarget === 'top' ? <ArrowUp size={18} aria-hidden="true" /> : <ArrowDown size={18} aria-hidden="true" />}
+          <span>{t(scrollTarget === 'top' ? 'reader.scrollToTop' : 'reader.scrollToBottom')}</span>
+        </button>
+      )}
     </div>
   );
 }
