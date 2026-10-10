@@ -1,0 +1,40 @@
+:root {
+  /* Palette */
+  --c-paper: #FAF9F6;
+  --c-white: #FFFFFF;
+  --c-gold: #C5A04A;
+  --c-ink: #242521;
+  --c-gray: #77766F;
+  --c-green: #234536;
+
+  /* Derived tones. Gold and gray are too light for small text on white,
+     so text uses these deeper versions of the same hues. */
+  --c-gold-ink: #86671A;
+  --c-gray-ink: #62615B;
+  --c-line: rgba(36, 37, 33, 0.14);
+  --c-line-soft: rgba(36, 37, 33, 0.08);
+  --c-gold-line: rgba(197, 160, 74, 0.55);
+
+  /* Type */
+  --font-display: 'Cormorant Garamond', 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-ui: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-urdu: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'Noto Naskh Arabic', 'Segoe UI', Tahoma, serif;
+  --font-read: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+
+  /* Layout */
+  --container: 1240px;
+  --container-narrow: 760px;
+  --gutter: clamp(20px, 4vw, 48px);
+  --nav-h: 72px;
+  --section-y: clamp(72px, 10vw, 140px);
+
+  /* Motion */
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --dur: 240ms;
+}
+
+/* The Urdu interface uses one Nastaliq family for both display and UI text. */
+html[dir='rtl'] {
+  --font-display: var(--font-urdu);
+  --font-ui: var(--font-urdu);
+}

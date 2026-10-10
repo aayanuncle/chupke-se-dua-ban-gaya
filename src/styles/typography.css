@@ -1,0 +1,6 @@
+h1, h2, h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.1; letter-spacing: -0.01em; }
+html[dir='rtl'] h1, html[dir='rtl'] h2, html[dir='rtl'] h3 { line-height: 1.8; letter-spacing: 0; font-weight: 500; }
+html[dir='rtl'] body { line-height: 1.9; }
+html[dir='rtl'] p, html[dir='rtl'] li { line-height: 2; }
+
+.display-num { font-family: var(--font-display); font-weight: 500; font-feature-settings: 'lnum' 1; }

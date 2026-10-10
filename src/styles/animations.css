@@ -1,0 +1,20 @@
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes bookIn { from { opacity: 0; transform: translateY(18px) rotate(0deg); } to { opacity: 1; transform: translateY(0) rotate(var(--book-tilt, -1.5deg)); } }
+@keyframes pulse { 0%, 100% { opacity: 0.45; } 50% { opacity: 0.8; } }
+
+/* Soft entrance when a page opens */
+.page-enter { animation: fade 260ms var(--ease) both; }
+
+/* The one orchestrated moment: the hero text and cover */
+.reveal { opacity: 0; animation: rise 560ms var(--ease) forwards; }
+.reveal--1 { animation-delay: 60ms; }
+.reveal--2 { animation-delay: 140ms; }
+.reveal--3 { animation-delay: 230ms; }
+.reveal--4 { animation-delay: 310ms; }
+.reveal--5 { animation-delay: 380ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-delay: 0ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  .reveal { opacity: 1; }
+}
